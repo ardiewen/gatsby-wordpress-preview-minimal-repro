@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env${process.env.NODE_ENV && `.${process.env.NODE_ENV}`}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -12,6 +16,17 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        url: process.env.GATSBY_WORDPRESS_URL,
+        verbose: true,
+        debug: {
+          preview: true,
+          timeBuildSteps: true,
+        },
       },
     },
     `gatsby-transformer-sharp`,
